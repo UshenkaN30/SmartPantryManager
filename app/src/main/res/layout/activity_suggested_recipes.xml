@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:background="#F7F9F7"
-    tools:context=".MainActivity">
+    tools:context=".SuggestedRecipesActivity">
 
     <TextView
-        android:id="@+id/tvAppName"
+        android:id="@+id/tvRecipesTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Smart Pantry Manager"
+        android:text="Suggested Recipes"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#1B5E20"
@@ -22,55 +22,39 @@
         android:paddingBottom="8dp" />
 
     <TextView
-        android:id="@+id/tvPantryTitle"
+        android:id="@+id/tvRecipesSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Pantry"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#212121"
-        android:paddingTop="16dp"
-        android:paddingBottom="4dp" />
-
-    <TextView
-        android:id="@+id/tvPantrySubtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Keep track of the ingredients you have at home."
+        android:text="Recipes you can make using ingredients in your pantry."
         android:textSize="14sp"
         android:textColor="#616161"
-        android:paddingBottom="16dp" />
-
-    <Button
-        android:id="@+id/btnAddIngredient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+ Add Ingredient"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btnSuggestedRecipes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Suggested Recipes"
-        android:textAllCaps="false" />
+        android:gravity="center"
+        android:paddingBottom="20dp" />
 
     <TextView
-        android:id="@+id/tvEmptyPantry"
+        android:id="@+id/tvNoRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your pantry is empty. Add an ingredient to get started."
+        android:text="No recipes available yet."
         android:textSize="16sp"
         android:textColor="#757575"
         android:gravity="center"
         android:padding="24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPantry"
+        android:id="@+id/recyclerViewRecipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingTop="8dp"
         tools:listitem="@android:layout/simple_list_item_2" />
+
+    <Button
+        android:id="@+id/btnBackToPantry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Pantry"
+        android:textAllCaps="false"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
