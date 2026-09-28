@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvRecipeDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe Name"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+        <TextView
+            android:id="@+id/tvRecipeDetailIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe ingredients will appear here."
+            android:textSize="16sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instructions"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+        <TextView
+            android:id="@+id/tvRecipeDetailInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe instructions will appear here."
+            android:textSize="16sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp" />
+
+        <Button
+            android:id="@+id/btnBackToRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to Suggested Recipes"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</ScrollView>
