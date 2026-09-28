@@ -109,4 +109,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return ingredientList;
     }
+
+    // Delete an ingredient
+    public int deleteIngredient(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int result = db.delete(
+                TABLE_INGREDIENTS,
+                COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)}
+        );
+
+        db.close();
+
+        return result;
+    }
+    // Update an existing ingredient
+    public int updateIngredient(Ingredient ingredient) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, ingredient.getName());
+        values.put(COLUMN_QUANTITY, ingredient.getQuantity());
+        values.put(COLUMN_UNIT, ingredient.getUnit());
+
+        int result = db.update(
+                TABLE_INGREDIENTS,
+                values,
+                COLUMN_ID + " = ?",
+                new String[]{String.valueOf(ingredient.getId())}
+        );
+
+        db.close();
+
+        return result;
+    }
 }
