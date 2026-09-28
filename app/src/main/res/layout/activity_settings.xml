@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Smart Pantry Manager Settings"
+        android:textSize="16sp"
+        android:textColor="#616161"
+        android:layout_marginBottom="30dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#212121" />
+
+    <Switch
+        android:id="@+id/switchNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable pantry notifications"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recipe Preferences"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#212121" />
+
+    <Switch
+        android:id="@+id/switchRecipeSuggestions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable recipe suggestions"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp" />
+
+    <Button
+        android:id="@+id/btnBackToPantry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Pantry"
+        android:textAllCaps="false" />
+
+</LinearLayout>
