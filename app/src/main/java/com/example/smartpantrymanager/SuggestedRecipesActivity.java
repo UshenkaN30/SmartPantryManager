@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class SuggestedRecipesActivity extends AppCompatActivity {
 
     private Button btnBackToPantry;
+    private TextView tvRecipesTitle;
+    private TextView tvRecipesSubtitle;
     private TextView tvNoRecipes;
     private RecyclerView recyclerViewRecipes;
 
@@ -27,6 +29,8 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
 
         // Connect views
         btnBackToPantry = findViewById(R.id.btnBackToPantry);
+        tvRecipesTitle = findViewById(R.id.tvRecipesTitle);
+        tvRecipesSubtitle = findViewById(R.id.tvRecipesSubtitle);
         tvNoRecipes = findViewById(R.id.tvNoRecipes);
         recyclerViewRecipes = findViewById(R.id.recyclerViewRecipes);
 
@@ -35,38 +39,47 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                 new LinearLayoutManager(this)
         );
 
-        // Connect to SQLite database
         databaseHelper = new DatabaseHelper(this);
 
-        // Load matching recipes
-        loadSuggestedRecipes();
+        // Check whether user selected View All Recipes
+        boolean showAllRecipes =
+                getIntent().getBooleanExtra(
+                        "show_all_recipes",
+                        false
+                );
 
-        // Back button
+        if (showAllRecipes) {
+            loadAllRecipes();
+        } else {
+            loadSuggestedRecipes();
+        }
+
+        // Back to Pantry
         btnBackToPantry.setOnClickListener(v -> finish());
     }
 
     private void loadSuggestedRecipes() {
 
-        // Get ingredients currently stored in the pantry
+        tvRecipesTitle.setText("Suggested Recipes");
+        tvRecipesSubtitle.setText(
+                "Recipes you can make using your current pantry ingredients."
+        );
+
         ArrayList<Ingredient> pantryIngredients =
                 databaseHelper.getAllIngredients();
 
-        // Get all 15 recipes
         ArrayList<Recipe> allRecipes =
                 RecipeData.getAllRecipes();
 
-        // Find recipes where ALL required ingredients are available
         ArrayList<Recipe> matchingRecipes =
                 RecipeMatcher.getMatchingRecipes(
                         pantryIngredients,
                         allRecipes
                 );
 
-        // Display matching recipes
         recipeAdapter = new RecipeAdapter(matchingRecipes);
         recyclerViewRecipes.setAdapter(recipeAdapter);
 
-        // Show a message when there are no matches
         if (matchingRecipes.isEmpty()) {
 
             tvNoRecipes.setText(
@@ -81,5 +94,22 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
             tvNoRecipes.setVisibility(View.GONE);
             recyclerViewRecipes.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void loadAllRecipes() {
+
+        tvRecipesTitle.setText("All Recipes");
+        tvRecipesSubtitle.setText(
+                "Browse all 15 recipes available in Smart Pantry Manager."
+        );
+
+        ArrayList<Recipe> allRecipes =
+                RecipeData.getAllRecipes();
+
+        recipeAdapter = new RecipeAdapter(allRecipes);
+        recyclerViewRecipes.setAdapter(recipeAdapter);
+
+        tvNoRecipes.setVisibility(View.GONE);
+        recyclerViewRecipes.setVisibility(View.VISIBLE);
     }
 }

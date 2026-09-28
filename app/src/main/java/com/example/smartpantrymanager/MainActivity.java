@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnAddIngredient;
     private Button btnSuggestedRecipes;
+    private Button btnAllRecipes;
     private Button btnSettings;
 
     private TextView tvEmptyPantry;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         // Connect views
         btnAddIngredient = findViewById(R.id.btnAddIngredient);
         btnSuggestedRecipes = findViewById(R.id.btnSuggestedRecipes);
+        btnAllRecipes = findViewById(R.id.btnAllRecipes);
         btnSettings = findViewById(R.id.btnSettings);
+
         tvEmptyPantry = findViewById(R.id.tvEmptyPantry);
         recyclerViewPantry = findViewById(R.id.recyclerViewPantry);
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 new LinearLayoutManager(this)
         );
 
-        // Add Ingredient button
+        // Add Ingredient
         btnAddIngredient.setOnClickListener(v -> {
             Intent intent = new Intent(
                     MainActivity.this,
@@ -54,16 +57,31 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Suggested Recipes button
+        // Suggested Recipes
         btnSuggestedRecipes.setOnClickListener(v -> {
             Intent intent = new Intent(
                     MainActivity.this,
                     SuggestedRecipesActivity.class
             );
+
+            intent.putExtra("show_all_recipes", false);
+
             startActivity(intent);
         });
 
-        // Settings button
+        // View All Recipes
+        btnAllRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SuggestedRecipesActivity.class
+            );
+
+            intent.putExtra("show_all_recipes", true);
+
+            startActivity(intent);
+        });
+
+        // Settings
         btnSettings.setOnClickListener(v -> {
             Intent intent = new Intent(
                     MainActivity.this,
@@ -76,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         loadIngredients();
     }
 
@@ -88,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewPantry.setAdapter(ingredientAdapter);
 
-        // Show empty message only when pantry has no ingredients
         if (ingredientList.isEmpty()) {
             tvEmptyPantry.setVisibility(View.VISIBLE);
             recyclerViewPantry.setVisibility(View.GONE);
