@@ -39,6 +39,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                 new LinearLayoutManager(this)
         );
 
+        // Connect to SQLite database
         databaseHelper = new DatabaseHelper(this);
 
         // Check whether user selected View All Recipes
@@ -61,23 +62,29 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
     private void loadSuggestedRecipes() {
 
         tvRecipesTitle.setText("Suggested Recipes");
+
         tvRecipesSubtitle.setText(
                 "Recipes you can make using your current pantry ingredients."
         );
 
+        // Get pantry ingredients from SQLite
         ArrayList<Ingredient> pantryIngredients =
                 databaseHelper.getAllIngredients();
 
+        // Get recipes from SQLite
         ArrayList<Recipe> allRecipes =
-                RecipeData.getAllRecipes();
+                databaseHelper.getAllRecipes();
 
+        // Find recipes that match the pantry
         ArrayList<Recipe> matchingRecipes =
                 RecipeMatcher.getMatchingRecipes(
                         pantryIngredients,
                         allRecipes
                 );
 
-        recipeAdapter = new RecipeAdapter(matchingRecipes);
+        recipeAdapter =
+                new RecipeAdapter(matchingRecipes);
+
         recyclerViewRecipes.setAdapter(recipeAdapter);
 
         if (matchingRecipes.isEmpty()) {
@@ -99,17 +106,33 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
     private void loadAllRecipes() {
 
         tvRecipesTitle.setText("All Recipes");
+
         tvRecipesSubtitle.setText(
                 "Browse all 15 recipes available in Smart Pantry Manager."
         );
 
+        // Get all 15 recipes directly from SQLite
         ArrayList<Recipe> allRecipes =
-                RecipeData.getAllRecipes();
+                databaseHelper.getAllRecipes();
 
-        recipeAdapter = new RecipeAdapter(allRecipes);
+        recipeAdapter =
+                new RecipeAdapter(allRecipes);
+
         recyclerViewRecipes.setAdapter(recipeAdapter);
 
-        tvNoRecipes.setVisibility(View.GONE);
-        recyclerViewRecipes.setVisibility(View.VISIBLE);
+        if (allRecipes.isEmpty()) {
+
+            tvNoRecipes.setText(
+                    "No recipes are available."
+            );
+
+            tvNoRecipes.setVisibility(View.VISIBLE);
+            recyclerViewRecipes.setVisibility(View.GONE);
+
+        } else {
+
+            tvNoRecipes.setVisibility(View.GONE);
+            recyclerViewRecipes.setVisibility(View.VISIBLE);
+        }
     }
 }
